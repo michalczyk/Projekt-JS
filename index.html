@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projekt JS</title>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>Project JS</h1>
+      <div class="search_container">
+        <input id="car_search" class="search_input" type="search" />
+        <img
+          class="search_icon"
+          src="https://cdn-icons-png.flaticon.com/512/3031/3031293.png"
+        />
+      </div>
+    </nav>
+    <section id="cars_container" class="cars_container"></section>
+    <section id="configuration_form" class="configuration_form hidden">
+      <button class="btn" id="return_to_cars_list" type="button">
+        Powrót do wyboru
+      </button>
+      <h2>Wybrany samochód</h2>
+      <div id="selected_car_details"></div>
+      <h2>Dane kupującego</h2>
+      <form class="buyer_details">
+        <div>
+          <label for="financing">Finansowanie: </label>
+
+          <input type="radio" id="cash" name="financing" value="cash" />
+          <label for="cash">Gotówka</label>
+          <input type="radio" id="leasing" name="financing" value="leasing" />
+          <label for="leasing">Leasing</label>
+        </div>
+        <label for="full_name">Imię i Nazwisko</label>
+        <input id="full_name" type="text" />
+        <label for="pickup_date">Data dostawy </label>
+        <select id="pickup_date">
+          <option id="date_in_2_weeks" value="in2weeks">DD-MM-YYYY</option>
+        </select>
+      </form>
+      <h2>Akcesoria</h2>
+      <div class="car_accessories_container" id="car_accessories_list"></div>
+      <div class="selected_car_summary">
+        <p>
+          Całkowita cena wybranego samochodu: <span id="car_price">Cena</span>
+        </p>
+      </div>
+      <div class="wrong_input_data hidden">Błędne dane!</div>
+      <button class="btn" id="buy_selected_car" type="button">Kup</button>
+    </section>
+    <section id="confirmation_section" class="configuration_form hidden">
+      <h2>Dziękujemy za zakup!</h2>
+      <div id="selected_car_confirmation"></div>
+      <div id="selected_car_financing"></div>
+      <div id="selected_car_total_price" class="selected_car_summary"></div>
+      <button class="btn" type="button" onClick="window.location.reload();">
+        Rozpocznij nowe wyszukiwanie
+      </button>
+    </section>
+    <footer>
+      <p>&copy Joanna Michalczyk</p>
+      <p>Projekt zaliczeniowy JS</p>
+    </footer>
+  </body>
+</html>
