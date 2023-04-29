@@ -59,7 +59,7 @@ const accessories = [
     price: 1000,
   },
   {
-    name: "Opony ziomowe",
+    name: "Opony zimowe",
     price: 1500,
   },
   {
