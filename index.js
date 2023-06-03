@@ -1,5 +1,5 @@
 const currency = "PLN";
-let cars = [
+const cars = [
   {
     brand: "Volkswagen",
     model: "Golf 7",
@@ -72,8 +72,8 @@ const accessories = [
   },
 ];
 
-let $searchCars = document.getElementsByClassName("search_icon")[0];
-let $searchCarsInput = document.getElementById("car_search");
+const $searchCars = document.getElementsByClassName("search_icon")[0];
+const $searchCarsInput = document.getElementById("car_search");
 let $carContainer = document.querySelectorAll(".car_container");
 
 $searchCars.addEventListener("click", showCarList);
@@ -84,20 +84,20 @@ $searchCarsInput.addEventListener("keypress", function (event) {
     $searchCars.click();
   }
 });
-const $carsContainer = document.getElementById("cars_container");
+let $carsContainer = document.getElementById("cars_container");
 window.addEventListener("load", showCarList());
 
 function showCarList() {
   $carsContainer.innerHTML = "";
-  let searchedCars = $searchCarsInput.value;
+  const searchedCars = $searchCarsInput.value;
   let carsArray = [...cars];
   if (searchedCars != "") {
     carsArray = cars.filter((car) => {
-      return car.brand === searchedCars;
+      return car.brand.toLocaleLowerCase() === searchedCars.toLocaleLowerCase();
     });
   }
   for (let car of carsArray) {
-    let $carContainerDiv = document.createElement("div");
+    const $carContainerDiv = document.createElement("div");
     $carContainerDiv.setAttribute("class", "car_container");
 
     let $carPicture = document.createElement("img");
@@ -105,7 +105,7 @@ function showCarList() {
     $carPicture.src = car.image;
     $carContainerDiv.appendChild($carPicture);
 
-    let $CarInformationContainer = document.createElement("div");
+    const $CarInformationContainer = document.createElement("div");
     $CarInformationContainer.setAttribute("class", "car_information_container");
 
     $carContainerDiv.appendChild($CarInformationContainer);
@@ -142,7 +142,7 @@ function showCarList() {
   $carContainer = document.querySelectorAll(".car_container");
 
   if (carsArray.length > 0) {
-    let $lastCarPic = document.querySelector(
+    const $lastCarPic = document.querySelector(
       `img[src="${carsArray[carsArray.length - 1].image}"]`
     );
     $lastCarPic.onload = showSelectedCar;
@@ -155,13 +155,13 @@ function showCarList() {
 let dateIn2Weeks = new Date();
 dateIn2Weeks.setDate(dateIn2Weeks.getDate() + 14);
 
-const $pickUpDate = document.getElementById("date_in_2_weeks");
+let $pickUpDate = document.getElementById("date_in_2_weeks");
 $pickUpDate.innerText = dateIn2Weeks.toLocaleDateString();
 
 const $accessoriesList = document.getElementById("car_accessories_list");
 
 for (let accessory of accessories) {
-  let $singleAccessory = document.createElement("div");
+  const $singleAccessory = document.createElement("div");
   $singleAccessory.setAttribute("class", "single_accessory");
 
   let $accessoryName = document.createElement("p");
@@ -186,7 +186,7 @@ for (let accessory of accessories) {
 let carPrice;
 let $carPrice = document.getElementById("car_price");
 let $selectedCarDiv = document.getElementById("selected_car_details");
-let $configurationForm = document.getElementById("configuration_form");
+const $configurationForm = document.getElementById("configuration_form");
 function showSelectedCar() {
   $carContainer.forEach((i) =>
     i.addEventListener("click", (e) => {
@@ -205,18 +205,19 @@ function showSelectedCar() {
   );
 }
 
-let $returnToCarsList = document.getElementById("return_to_cars_list");
+const $returnToCarsList = document.getElementById("return_to_cars_list");
 $returnToCarsList.addEventListener("click", () => {
   $configurationForm.classList.toggle("hidden");
   document.querySelector(".cars_container").classList.toggle("hidden");
 });
 
-let $accessoryCheckbox = document.querySelectorAll(".accessory_checkbox");
+const $accessoryCheckbox = document.querySelectorAll(".accessory_checkbox");
 $accessoryCheckbox.forEach((i) =>
   i.addEventListener("click", (e) => {
     e.currentTarget.classList.toggle("selected_accesory");
     let additionalcost = 0;
-    let $selectedAccessories = document.querySelectorAll(".selected_accesory");
+    const $selectedAccessories =
+      document.querySelectorAll(".selected_accesory");
     $selectedAccessories.forEach(
       (i) => (additionalcost += Number(i.parentElement.children[2].innerText))
     );
@@ -230,8 +231,8 @@ $accessoryCheckbox.forEach((i) =>
 );
 let buyerName = document.getElementById("full_name");
 buyerName.value = localStorage.getItem("full_name");
-let financing = document.querySelectorAll('input[name="financing"]');
-let valueOfFinancing = localStorage.getItem("financing");
+const financing = document.querySelectorAll('input[name="financing"]');
+const valueOfFinancing = localStorage.getItem("financing");
 financing.forEach((elem) => {
   if (elem.value == valueOfFinancing) {
     elem.checked = true;
@@ -248,7 +249,7 @@ financing.forEach((elem) => {
 });
 
 document.getElementById("buy_selected_car").addEventListener("click", () => {
-  let $errorDiv = document.getElementsByClassName("wrong_input_data")[0];
+  const $errorDiv = document.getElementsByClassName("wrong_input_data")[0];
   if (checkInputData()) {
     $errorDiv.classList.add("hidden");
     $configurationForm.classList.toggle("hidden");
@@ -271,7 +272,7 @@ function checkInputData() {
   }
 }
 
-let $confirmationSection = document.getElementById("confirmation_section");
+const $confirmationSection = document.getElementById("confirmation_section");
 let $confirmationDiv = document.getElementById("selected_car_confirmation");
 let $confirmationTotalPrice = document.getElementById(
   "selected_car_total_price"
@@ -286,7 +287,7 @@ function showConfirmation() {
   $confirmationTotalPrice.innerHTML = document.getElementsByClassName(
     "selected_car_summary"
   )[0].innerHTML;
-  let chosenFinancing = localStorage.getItem("financing");
+  const chosenFinancing = localStorage.getItem("financing");
 
   if (chosenFinancing == "cash") {
     $confirmationFinancing.innerText = "Wybrano finansowanie: Gotówka";
